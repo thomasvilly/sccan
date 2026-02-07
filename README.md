@@ -72,7 +72,7 @@ Restart the kiosk after changing.
 
 | Model | Config value | RAM | Speed (CPU) | Best for |
 |-------|-------------|-----|-------------|----------|
-| Qwen 2.5-VL 7B | `qwen2.5-vl:7b` | ~6GB | 5-10s | Dense text, tables (default) |
+| Qwen 2.5-VL 7B | `qwen2.5vl:7b` | ~6GB | 5-10s | Dense text, tables (default) |
 | Llama 3.2 Vision 11B | `llama3.2-vision:11b` | ~8GB | 5-10s | General reasoning |
 | Moondream 2 | `moondream:1.8b` | ~2GB | <1s | Speed over accuracy |
 
@@ -80,8 +80,8 @@ Change in `config.toml`:
 
 ```toml
 [ollama]
-extraction_model = "qwen2.5-vl:7b"       # or llama3.2-vision:11b or moondream:1.8b
-reconciliation_model = "qwen2.5-vl:7b"
+extraction_model = "qwen2.5vl:7b"       # or llama3.2-vision:11b or moondream:1.8b
+reconciliation_model = "qwen2.5vl:7b"
 ```
 
 ## Project Structure

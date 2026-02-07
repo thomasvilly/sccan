@@ -105,9 +105,9 @@ MERGED_SCHEMA = {
 OLLAMA_JSON_CAPABLE_MODELS = {
     "llama3.2-vision",
     "llama3.2-vision:11b",
-    "qwen2.5-vl",
-    "qwen2.5-vl:7b",
-    "qwen2.5-vl:3b",
+    "qwen2.5vl",
+    "qwen2.5vl:7b",
+    "qwen2.5vl:3b",
 }
 
 

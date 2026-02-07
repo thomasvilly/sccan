@@ -362,8 +362,8 @@ def test_schemas_have_required_fields():
 
 
 def test_ollama_json_capable_detection():
-    assert _ollama_model_supports_json("qwen2.5-vl:7b") is True
-    assert _ollama_model_supports_json("qwen2.5-vl") is True
+    assert _ollama_model_supports_json("qwen2.5vl:7b") is True
+    assert _ollama_model_supports_json("qwen2.5vl") is True
     assert _ollama_model_supports_json("llama3.2-vision:11b") is True
     assert _ollama_model_supports_json("moondream:1.8b") is False
     assert _ollama_model_supports_json("some-random-model") is False
