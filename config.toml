@@ -56,7 +56,7 @@ reconciliation_model = "openai/gpt-4o"
 # ===========================================================================
 
 [camera]
-camera_index = 4
+camera_index = 1
 capture_width = 1920
 capture_height = 1080
 fps_target = 20
@@ -67,8 +67,8 @@ fps_target = 20
 
 [state_transitions]
 # CRITICAL: These are the main knobs to tune during testing
-form_detection_frames = 10      # READY → PROCESSING
-good_capture_frames = 3         # PROCESSING → capture
+form_detection_frames = 10       # READY → PROCESSING
+good_capture_frames = 1         # PROCESSING → capture
 issue_retry_frames = 5          # ISSUES → PROCESSING
 
 [timeouts]
@@ -81,7 +81,7 @@ success_display_seconds = 3     # DONE → READY
 # ===========================================================================
 
 [opencv_thresholds]
-blur_threshold = 100            # Laplacian variance minimum
+blur_threshold = 30             # Laplacian variance minimum
 contrast_threshold = 30         # Grayscale std dev minimum
 glare_threshold = 0.05          # Max fraction of blown-out pixels
 mean_intensity_min = 50         # Minimum brightness
@@ -94,7 +94,7 @@ aspect_ratio_max = 1.8
 canny_low = 50
 canny_high = 150
 gaussian_kernel = 5
-contour_approx_epsilon = 0.02
+contour_approx_epsilon = 0.05
 
 [page_detection]
 header_crop_fraction = 0.15
@@ -131,4 +131,4 @@ log_to_console = true
 [ui]
 title = "💪 Fitness Form Capture Kiosk"
 show_camera_feed = true
-show_debug_overlay = false
+show_debug_overlay = true

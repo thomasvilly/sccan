@@ -180,26 +180,17 @@ def validate_frame(frame, config):
 
 def detect_page_type(image_path, config):
     """
-    Determine if a captured image is 'cardio' or 'strength' by examining
-    the dark pixel density in the header region.
-    Returns: "cardio", "strength", or None
+    BYPASS: Always return 'generic_form' so we capture whatever is visible.
+    We assume the user follows the workflow: Scan Side A -> Flip -> Scan Side B.
+    The LLM will figure out which image is which later.
     """
-    pd = config["page_detection"]
-    img = cv2.imread(image_path)
-    height = img.shape[0]
-    header = img[0 : int(height * pd["header_crop_fraction"]), :]
-
-    gray = cv2.cvtColor(header, cv2.COLOR_BGR2GRAY)
-    _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-
-    dark_pixel_ratio = float(np.sum(binary == 0) / binary.size)
-    logging.info(f"Page detection: dark_pixel_ratio={dark_pixel_ratio:.4f} for {image_path}")
-
-    if dark_pixel_ratio > pd["dark_pixel_threshold_cardio"]:
-        return "cardio"
-    elif dark_pixel_ratio > pd["dark_pixel_threshold_strength"]:
-        return "strength"
-    return None
+    # Verify the image file actually exists and isn't empty
+    if not os.path.exists(image_path) or os.path.getsize(image_path) == 0:
+        return None
+        
+    # We just return a placeholder string. 
+    # The exact string doesn't matter as long as it's not None.
+    return "generic_form"
 
 
 # ---------------------------------------------------------------------------
@@ -262,7 +253,39 @@ def cleanup_old_orphans(config, max_age_seconds=3600):
             os.remove(f)
             logging.info(f"Cleaned up old orphan: {f}")
 
+import numpy as np
 
+def is_duplicate_image(image_path_1, image_path_2, threshold=40):
+    """
+    Returns True if two images are visually similar (ignoring small movements).
+    threshold: Lower = stricter (0 = identical, 255 = completely different).
+    """
+    try:
+        # Load as grayscale
+        img1 = cv2.imread(image_path_1, cv2.IMREAD_GRAYSCALE)
+        img2 = cv2.imread(image_path_2, cv2.IMREAD_GRAYSCALE)
+        
+        if img1 is None or img2 is None:
+            return False
+
+        # Resize to small thumbnails (64x64) to ignore high-res noise
+        # and minor alignment shifts
+        img1_small = cv2.resize(img1, (64, 64))
+        img2_small = cv2.resize(img2, (64, 64))
+
+        # Calculate the Mean Absolute Difference between pixels
+        diff = np.mean(np.abs(img1_small.astype("float") - img2_small.astype("float")))
+        
+        # If the difference is small (e.g. < 15), they are the same page
+        logging.info(f"Duplicate Check: Difference Score = {diff:.2f}")
+        same = diff < threshold
+        print(same)
+        return same
+        
+    except Exception as e:
+        logging.error(f"Duplicate check failed: {e}")
+        return False
+        
 # ---------------------------------------------------------------------------
 # FRAME BUFFER
 # ---------------------------------------------------------------------------
@@ -372,44 +395,62 @@ def save_captured_frame(frame, config):
 
 
 def handle_capture(best_frame, config, is_second_page=False):
+    """
+    Saves the frame and handles the logic for Page 1 vs Page 2.
+    Now includes a hard reset to prevent the '22/1 frames' loop.
+    """
+    # 1. Save the image to disk
     filepath = save_captured_frame(best_frame, config)
-    page_type = detect_page_type(filepath, config)
-    logging.info(f"Detected page type: {page_type} for {filepath}")
+    logging.info(f"Captured candidate: {filepath}")
 
-    if page_type is None:
-        os.remove(filepath)
-        transition_to(ISSUES, reason="page_type_unreadable")
-        return
-
+    # 2. IF THIS IS THE SECOND PAGE (The Logic Fix)
     if is_second_page and st.session_state.first_page is not None:
-        if page_type == st.session_state.first_page.page_type:
-            os.remove(filepath)
-            logging.warning(f"Duplicate page detected: both are {page_type}")
-            transition_to(ISSUES, reason="duplicate_page")
-            return
-
         first = st.session_state.first_page
-        logging.info(f"Both pages captured: {first.page_type}={first.filepath}, {page_type}={filepath}")
+        
+        # COMPARE: Is this just Page 1 again?
+        # threshold=5 is strict. 
+        #   >5 means "These are different images" (Good)
+        #   <5 means "This is the same image" (Bad)
+        if is_duplicate_image(first.filepath, filepath, threshold=5):
+            logging.warning("Duplicate detected: You haven't flipped the page yet.")
+            
+            # --- CRITICAL FIX: RESET THE COUNTER ---
+            # This stops the "22/1" bug. We force the app to start counting from 0 again.
+            st.session_state["good_frames"] = 0
+            
+            # Delete the useless duplicate file
+            try:
+                os.remove(filepath)
+            except OSError:
+                pass
+
+            # Tell the user why nothing happened
+            st.toast("⚠️ Still seeing Page 1. Please flip the paper!", icon="📄")
+            return 
+
+        # 3. SUCCESS: We have two DIFFERENT pages
+        logging.info(f"Two distinct pages captured. Sending to OCR.")
+        
+        # Send both to the LLM. 
+        # We don't know which is cardio/strength, so we just label them 1 and 2.
         st.session_state.last_result = {
-            "cardio": first.filepath if first.page_type == "cardio" else filepath,
-            "strength": first.filepath if first.page_type == "strength" else filepath,
+            "cardio": first.filepath,
+            "strength": filepath
         }
         transition_to(DONE)
         return
 
-    orphan_match = find_orphan_match(page_type, config)
-    if orphan_match:
-        logging.info(f"Orphan match found! new={page_type} orphan={orphan_match}")
-        st.session_state.last_result = {
-            "cardio": orphan_match if "cardio" in orphan_match else filepath,
-            "strength": orphan_match if "strength" in orphan_match else filepath,
-        }
-        transition_to(DONE)
-        return
-
-    st.session_state.first_page = CapturedPage(filepath=filepath, page_type=page_type, timestamp=time.time())
+    # 4. IF THIS IS THE FIRST PAGE
+    # Just save it and wait for the second one.
+    st.session_state.first_page = CapturedPage(
+        filepath=filepath, 
+        page_type="generic_form", 
+        timestamp=time.time()
+    )
+    
+    # Notify user
+    st.toast("✅ Page 1 Captured! Flip to Page 2.", icon="🔄")
     transition_to(AWAITING_SECOND_PAGE)
-
 
 # ---------------------------------------------------------------------------
 # STATE HANDLERS
@@ -572,7 +613,7 @@ def run_kiosk():
     with col_status:
         status_placeholder = st.empty()
         debug_placeholder = st.empty()
-
+    
     cap = cv2.VideoCapture(config["camera"]["camera_index"])
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, config["camera"]["capture_width"])
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, config["camera"]["capture_height"])
