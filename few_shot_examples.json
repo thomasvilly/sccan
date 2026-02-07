@@ -1,0 +1,150 @@
+{
+  "cardio_examples": [
+    {
+      "image_description": "Form with CCCARE ID '12345', Target HR 120-140, Target RPE 12-14. NuStep arms setting 5, seat 3. One session: Date 1/15/26, Time 30min, RPE 12, Watch #3, Activity NS, Work Rate Level 8, HR Range 118-132, Comments 'felt good'.",
+      "expected_json": {
+        "cccare_id": "12345",
+        "target_hr": "120-140",
+        "target_rpe": "12-14",
+        "equipment_settings": {
+          "nustep_arms": "5",
+          "nustep_seat": "3",
+          "leg_stab": null,
+          "recumbent_bike_seat": null,
+          "upright_bike_seat": null
+        },
+        "sessions": [
+          {
+            "date": "2026-01-15",
+            "time_minutes": 30,
+            "rpe": 12,
+            "watch_number": "3",
+            "activity": "NS",
+            "work_rate": "Level 8",
+            "heart_rate_range": "118-132",
+            "comments": "felt good"
+          }
+        ]
+      }
+    },
+    {
+      "image_description": "Form with CCCARE ID '67890', Target HR 110-130, Target RPE 11-13. Recumbent bike seat 4. Two sessions: (1) Date 1/20/26, Time 25min, RPE 13, Watch #1, Activity RB, Work Rate Level 5, HR Range 112-128. (2) Date 1/22/26, Time 30min, RPE 12, Watch #1, Activity NS, Work Rate Level 7, HR Range 115-125, Comments 'knee sore'.",
+      "expected_json": {
+        "cccare_id": "67890",
+        "target_hr": "110-130",
+        "target_rpe": "11-13",
+        "equipment_settings": {
+          "nustep_arms": null,
+          "nustep_seat": null,
+          "leg_stab": null,
+          "recumbent_bike_seat": "4",
+          "upright_bike_seat": null
+        },
+        "sessions": [
+          {
+            "date": "2026-01-20",
+            "time_minutes": 25,
+            "rpe": 13,
+            "watch_number": "1",
+            "activity": "RB",
+            "work_rate": "Level 5",
+            "heart_rate_range": "112-128",
+            "comments": null
+          },
+          {
+            "date": "2026-01-22",
+            "time_minutes": 30,
+            "rpe": 12,
+            "watch_number": "1",
+            "activity": "NS",
+            "work_rate": "Level 7",
+            "heart_rate_range": "115-125",
+            "comments": "knee sore"
+          }
+        ]
+      }
+    }
+  ],
+  "strength_examples": [
+    {
+      "image_description": "Form with CCCARE ID '12345', Date 1/15/26. Exercises: Squats 12 reps @ 50lbs (2 sets), Chest press 10 reps @ 30lbs (2 sets), Bent knee hip raise 15 reps no weight, Vertical traction 10 reps @ 40lbs. Stretches: Quad, Hamstring, Glute, Hip flexor checked.",
+      "expected_json": {
+        "cccare_id": "12345",
+        "date": "2026-01-15",
+        "exercises": [
+          {
+            "exercise_name": "Squats",
+            "sets": [
+              {"reps": 12, "weight": 50},
+              {"reps": 12, "weight": 50}
+            ]
+          },
+          {
+            "exercise_name": "Chest press",
+            "sets": [
+              {"reps": 10, "weight": 30},
+              {"reps": 10, "weight": 30}
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise",
+            "sets": [
+              {"reps": 15, "weight": 0}
+            ]
+          },
+          {
+            "exercise_name": "Vertical traction",
+            "sets": [
+              {"reps": 10, "weight": 40}
+            ]
+          }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor"]
+      }
+    },
+    {
+      "image_description": "Form with CCCARE ID '67890', Date 1/20/26. Exercises: Squats 10 reps @ 40lbs, Airplane 3 sets of 10 reps no weight, Front bridge 30 seconds (2 sets), Leg lowers 12 reps (2 sets), Thoracic rotation 10 reps each side. All 7 stretches checked.",
+      "expected_json": {
+        "cccare_id": "67890",
+        "date": "2026-01-20",
+        "exercises": [
+          {
+            "exercise_name": "Squats",
+            "sets": [
+              {"reps": 10, "weight": 40}
+            ]
+          },
+          {
+            "exercise_name": "Airplane",
+            "sets": [
+              {"reps": 10, "weight": 0},
+              {"reps": 10, "weight": 0},
+              {"reps": 10, "weight": 0}
+            ]
+          },
+          {
+            "exercise_name": "Front bridge",
+            "sets": [
+              {"reps": 30, "weight": 0},
+              {"reps": 30, "weight": 0}
+            ]
+          },
+          {
+            "exercise_name": "Leg lowers",
+            "sets": [
+              {"reps": 12, "weight": 0},
+              {"reps": 12, "weight": 0}
+            ]
+          },
+          {
+            "exercise_name": "Thoracic rotation",
+            "sets": [
+              {"reps": 10, "weight": 0}
+            ]
+          }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"]
+      }
+    }
+  ]
+}
