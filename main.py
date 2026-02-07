@@ -583,8 +583,7 @@ def run_kiosk():
         logging.error("Camera failed to open")
         return
 
-    logging.info(f"Camera opened: index={config['camera']['camera_index']} "
-                 f"resolution={cap.get(cv2.CAP_PROP_FRAME_WIDTH):.0f}x{cap.get(cv2.CAP_PROP_FRAME_HEIGHT):.0f}")
+    logging.info(f"Camera opened: index={config['camera']['camera_index']} resolution={cap.get(cv2.CAP_PROP_FRAME_WIDTH):.0f}x{cap.get(cv2.CAP_PROP_FRAME_HEIGHT):.0f}")
 
     while True:
         ret, frame_full = cap.read()
@@ -614,7 +613,7 @@ def run_kiosk():
             if config["ui"]["show_debug_overlay"]:
                 cv2.putText(display_frame, f"State: {st.session_state.state}", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
-            camera_placeholder.image(display_frame, channels="RGB", use_container_width=True)
+            camera_placeholder.image(display_frame, channels="RGB", width="stretch")
 
         css_class = f"status-{st.session_state.state.lower().replace('_', '-')}"
         if st.session_state.state == AWAITING_SECOND_PAGE:

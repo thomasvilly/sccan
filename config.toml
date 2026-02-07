@@ -21,8 +21,8 @@ host = "http://localhost:11434"
 # Option A (Balanced):   "llama3.2-vision:11b"   ~8GB RAM, 5-10s/image
 # Option B (OCR expert): "qwen2.5vl:7b"         ~6GB RAM, best for dense text
 # Option C (Fast):       "moondream:1.8b"         ~2GB RAM, sub-1s, lower accuracy
-extraction_model = "qwen2.5vl:7b"
-reconciliation_model = "qwen2.5vl:7b"
+extraction_model = "qwen3-vl:4b"
+reconciliation_model = "qwen3-vl:4b"
 
 # Context window size (vision models need headroom for image tokens)
 num_ctx = 4096
@@ -56,7 +56,7 @@ reconciliation_model = "openai/gpt-4o"
 # ===========================================================================
 
 [camera]
-camera_index = 0
+camera_index = 4
 capture_width = 1920
 capture_height = 1080
 fps_target = 20
