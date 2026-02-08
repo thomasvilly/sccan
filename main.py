@@ -827,32 +827,12 @@ def run_kiosk():
         elif st.session_state.state == AWAITING_SECOND_PAGE:
             side_label = "Side 2"
 
-        # Build dots with inline styles
-        dot_colors = ["#cbd5e1", "#cbd5e1", "#cbd5e1"]
-        if step >= 1:
-            dot_colors[0] = "#16a34a"
-        if step >= 2:
-            dot_colors[1] = "#16a34a"
-        if st.session_state.state == DONE:
-            dot_colors[2] = "#16a34a"
-        if step == 0 and st.session_state.state != DONE:
-            dot_colors[0] = "#3b82f6"
-        elif step == 1 and st.session_state.state != DONE:
-            dot_colors[1] = "#3b82f6"
-
-        dots_html = (
-            f'<span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:{dot_colors[0]};margin:0 6px;"></span>'
-            f'<span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:{dot_colors[1]};margin:0 6px;"></span>'
-            f'<span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:{dot_colors[2]};margin:0 6px;"></span>'
-        )
-
         status_html = f"""
 <div class="{card_class}" style="background: {bg_color}; {border_style}">
     <div class="kiosk-icon">{icon_svg}</div>
     <h1 class="kiosk-title" style="color: {text_color};">{title}</h1>
     <p class="kiosk-subtitle" style="color: {text_color};">{subtitle}</p>
     {"<p class='kiosk-hint' style='color: " + text_color + ";'>" + side_label + "</p>" if side_label else ""}
-    <div style="text-align:center;margin-top:2rem;">{dots_html}</div>
 </div>
 """
         
