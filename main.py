@@ -18,6 +18,7 @@ import time
 from collections import namedtuple
 from datetime import datetime
 from pathlib import Path
+import pygame
 
 import cv2
 import numpy as np
@@ -68,6 +69,22 @@ setup_logging(CONFIG)
 
 for dir_key in ("capture_dir", "orphan_dir", "result_dir", "temp_dir"):
     Path(CONFIG["paths"][dir_key]).mkdir(parents=True, exist_ok=True)
+
+pygame.mixer.init()
+
+def play_shutter(track):
+    if track == "START":
+        sound = pygame.mixer.Sound("sounds/Place in paper.mp3")
+    elif track =="SCAN":
+        sound = pygame.mixer.Sound("sounds/Scanning.mp3")
+    elif track =="ISSUES":
+        sound = pygame.mixer.Sound("sounds/Try again.mp3")
+    elif track =="FLIP":
+        sound = pygame.mixer.Sound("sounds/Flip.mp3")
+    elif track =="DONE":
+        sound = pygame.mixer.Sound("sounds/Scan complete.mp3")
+    sound.play()
+    return None
 
 # ---------------------------------------------------------------------------
 # DATA TYPES
@@ -560,16 +577,19 @@ def get_status_display(state, config):
         count = st.session_state.consecutive_detections
         needed = config["state_transitions"]["form_detection_frames"]
         sub = f"Detection: {count}/{needed}" if count > 0 else ""
+        play_shutter("START")
         return "📋", "Place your form on the tray", sub, "blue"
 
     if state == PROCESSING:
         count = st.session_state.consecutive_good
         needed = config["state_transitions"]["good_capture_frames"]
+        play_shutter("SCAN")
         return "🔍", "Hold still... validating", f"Quality check: {count}/{needed} good frames", "orange"
 
     if state == ISSUES:
         reason = st.session_state.issue_reason
         msg = ERROR_MESSAGES.get(reason, ERROR_MESSAGES["generic"])
+        play_shutter("ISSUES")
         return "⚠️", "Adjustment Needed", msg, "red"
 
     if state == AWAITING_SECOND_PAGE:
@@ -577,9 +597,11 @@ def get_status_display(state, config):
         elapsed = time.time() - st.session_state.awaiting_start_time
         remaining = max(0, config["timeouts"]["orphan_timeout_seconds"] - elapsed)
         page_name = first.page_type.title() if first else "Page"
+        play_shutter("FLIP")
         return "✅", f"{page_name} page captured!", f"Please flip and scan the other side ({remaining:.0f}s remaining)", "green"
 
     if state == DONE:
+        play_shutter("DONE")
         return "🎉", "Complete! Processing your form...", "Both pages captured successfully", "green"
 
     return "❓", "Unknown State", "", "gray"

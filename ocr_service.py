@@ -65,7 +65,6 @@ Return JSON with this structure:
   "cccare_id": string or null,
   "target_hr": string or null,
   "target_rpe": string or null,
-  "equipment_settings": { "nustep_arms": ..., "nustep_seat": ..., "leg_stab": ..., "recumbent_bike_seat": ..., "upright_bike_seat": ... },
   "sessions": [
     {
       "date": "Jan 5",
@@ -101,16 +100,15 @@ Return JSON with this structure:
         { "exercise_name": "Chest press on bench", "sets": [{"reps": 10, "weight": 20}, {"reps": 10, "weight": 20}] },
         { "exercise_name": "Airplane exercise", "sets": [] }
       ],
-      "stretches_completed": ["Quad", "Hamstring"],
+      "stretches_completed": true,
       "kinesiologist_signed": true
     }
   ]
 }
 
-Chest press and Bent knee hip raise have TWO set rows each.
-Airplane/Front bridge may have no data (empty sets []).
+Exercises may have TWO set rows each, or could be incomplete too.
 Weight 0 means bodyweight.
-Stretches: 1. Quad, 2. Hamstring, 3. Glute, 4. Hip flexor, 5. Calf, 6. Chest, 7. Upper back — only include checked ones.
+Stretches: check if done or not
 
 === GENERAL RULES ===
 - The form is landscape and may be rotated 90 degrees in the image

@@ -12,6 +12,7 @@ dependencies = [
     "tomli>=2.0.1",
     "python-dotenv>=1.0.0",
     "ollama>=0.4.0",
+    "pygame"
 ]
 
 [project.optional-dependencies]
