@@ -26,7 +26,7 @@ load_dotenv()
 CARDIO_SCHEMA = {
     "type": "object",
     "properties": {
-        "cccare_id": {"type": "string"},
+        "cccare_id": {"type": ["string", "null"]},
         "target_hr": {"type": ["string", "null"]},
         "target_rpe": {"type": ["string", "null"]},
         "equipment_settings": {
@@ -45,13 +45,14 @@ CARDIO_SCHEMA = {
                 "type": "object",
                 "properties": {
                     "date": {"type": ["string", "null"]},
-                    "time_minutes": {"type": ["integer", "null"]},
-                    "rpe": {"type": ["integer", "null"]},
-                    "watch_number": {"type": ["string", "null"]},
                     "activity": {"type": ["string", "null"]},
+                    "time_minutes": {"type": ["integer", "null"]},
                     "work_rate": {"type": ["string", "null"]},
                     "heart_rate_range": {"type": ["string", "null"]},
+                    "rpe": {"type": ["integer", "null"]},
                     "comments": {"type": ["string", "null"]},
+                    "watch": {"type": ["string", "null"]},
+                    "kinesiologist_signed": {"type": "boolean"},
                 },
             },
         },
@@ -62,30 +63,40 @@ CARDIO_SCHEMA = {
 STRENGTH_SCHEMA = {
     "type": "object",
     "properties": {
-        "cccare_id": {"type": "string"},
-        "date": {"type": ["string", "null"]},
-        "exercises": {
+        "cccare_id": {"type": ["string", "null"]},
+        "year": {"type": ["integer", "null"]},
+        "sessions": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "exercise_name": {"type": "string"},
-                    "sets": {
+                    "date": {"type": ["string", "null"]},
+                    "exercises": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
-                                "reps": {"type": ["integer", "null"]},
-                                "weight": {"type": ["integer", "null"]},
+                                "exercise_name": {"type": "string"},
+                                "sets": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "reps": {"type": ["integer", "null"]},
+                                            "weight": {"type": ["integer", "null"]},
+                                        },
+                                    },
+                                },
                             },
                         },
                     },
+                    "stretches_completed": {"type": "array", "items": {"type": "string"}},
+                    "kinesiologist_signed": {"type": "boolean"},
                 },
             },
         },
-        "stretches_completed": {"type": "array", "items": {"type": "string"}},
     },
-    "required": ["cccare_id", "exercises"],
+    "required": ["cccare_id", "sessions"],
 }
 
 MERGED_SCHEMA = {
@@ -105,9 +116,7 @@ MERGED_SCHEMA = {
 OLLAMA_JSON_CAPABLE_MODELS = {
     "llama3.2-vision",
     "llama3.2-vision:11b",
-    "qwen2.5vl",
-    "qwen2.5vl:7b",
-    "qwen2.5vl:3b",
+    "qwen3-vl:2b",
 }
 
 
@@ -133,84 +142,115 @@ _JSON_SUFFIX = (
 
 
 def build_cardio_prompt(examples, *, force_json_instruction=False):
-    prompt = """Extract data from this CARDIO RECORDING LOG fitness form.
+    prompt = """Extract all data from this CARDIO RECORDING LOG fitness form.
 
-The form contains:
-- CCCARE ID (handwritten, top of page)
-- Target HR and RPE values
-- Equipment settings (NuStep arms/seat, bike seats, etc.)
-- Multiple workout sessions in a table with columns:
-  - Date
-  - Time (total minutes)
-  - RPE (6-20 scale)
-  - Watch #
-  - Activity (NS/RB/UB/TM/E/ROW/LAPS)
-  - Work Rate / Speed / Elevation
-  - Heart Rate Range
-  - Comments
+The form is a landscape page (may appear rotated in the image). It contains:
 
-Common handwriting issues:
-- Number 1 looks like 7
-- Number 5 looks like 6
-- Number 0 looks like 6
+HEADER AREA (top of form):
+- Title: "CARDIO RECORDING LOG"
+- CCCARE ID: handwritten ID field (may be blank — return null if blank)
+- Equipment Settings: NuStep Arms, Seat, Leg Stab., Recumbent Bike Seat, Upright Bike Seat
+- Target HR (bpm) and Target RPE (e.g. "11-13")
+- Year: 2026
 
-Here are examples of correctly extracted data:
+SESSION TABLE — each row is one workout session with these columns:
+- Date (e.g. "Jan 5", "Jan 7")
+- Activity (NS = NuStep, RB = Recumbent Bike, UB = Upright Bike, TM = Treadmill, E = Elliptical, ROW, LAPS)
+- Time (total min) — integer
+- Work Rate / Speed/Elevation (e.g. "4.0 - 1%", "4 @ 50", "3 @ 75")
+- Heart Rate Range: low to high (e.g. "87-105")
+- RPE (6-20 scale) — integer
+- Comments (handwritten notes, e.g. "Too hard", "Tried hard, waited to do 20")
+- Watch # — the watch number used
+- Kinesiologist signature — set kinesiologist_signed to true if a signature/initials are present in that row
+
+IMPORTANT READING NOTES:
+- The form may be rotated 90 degrees — read it in landscape orientation
+- CCCARE ID may be blank on this page — return null, do NOT invent one
+- Work Rate field format varies by activity: treadmill uses "speed - incline%", NuStep uses "level @ resistance", bike uses "level @ watts"
+- Read ALL rows that have any handwritten data
+- Comments field is often blank (null), only include if text is actually written
 
 """
     for i, ex in enumerate(examples, 1):
         prompt += f"\nExample {i}:\n{ex['image_description']}\nCorrect extraction:\n{json.dumps(ex['expected_json'], indent=2)}\n"
-    prompt += "\n\nNow extract from this new form. Return data as JSON matching the schema. Empty fields should be null.\n"
+    prompt += "\nNow extract from this new form image. Return JSON matching the schema exactly. Empty/blank fields should be null.\n"
     if force_json_instruction:
         prompt += _JSON_SUFFIX
     return prompt
 
 
 def build_strength_prompt(examples, *, force_json_instruction=False):
-    prompt = """Extract data from this STRENGTHENING EXERCISES fitness form.
+    prompt = """Extract all data from this STRENGTHENING EXERCISES fitness form.
 
-The form contains:
-- CCCARE ID (handwritten, top of page)
-- Date (2026)
-- Exercise table with columns: Exercise name, Reps, Weight (Wt)
-- Multiple sets per exercise (up to 4 columns of reps/weight)
-- Stretches checklist at bottom (7 types of stretches)
+The form is a landscape page (may appear rotated in the image). It contains:
 
-Exercises listed:
-1. Squats, 2. Chest press, 3. Bent knee hip raise, 4. Vertical traction
-5. Airplane, 6. Front bridge, 7. Leg lowers, 8. Thoracic rotation, 9. Hip mobility
+HEADER AREA:
+- CCCARE ID: handwritten (e.g. "11-59.VEL")
+- Year: 2026
 
-Stretches: Quad, Hamstring, Glute, Hip flexor, Calf, Chest, Upper back
+FORM LAYOUT — the table has EXERCISES as rows and DATES as columns:
+- Each DATE column represents one session day (e.g. "Jan 5", "Jan 7", etc.)
+- Under each date, the client writes their reps and weight for each exercise
+- Each exercise row has sub-columns: Reps and Wt (weight in lbs)
+- If weight is 0 or blank, the exercise is bodyweight — return weight as 0
+- If both reps and weight are blank for an exercise on a given date, return empty sets array []
 
-Here are examples of correctly extracted data:
+EXERCISES (rows, in order on the form):
+1. Thoracic rotation (standing against wall)
+2. Dynamic hip mobility lateral lunge
+3. Squats (grip feet, spread floor)
+4. Chest press on bench — has TWO set rows (Wt/Reps twice)
+5. Bent knee hip raise - heels on step (risers) or heels on glute bench — has TWO set rows
+6. Vertical traction machine (seat #) — has Wt and Reps sub-columns
+7. Airplane exercise
+8. Front bridge with forearms on wedge (#) - progress to floor — has Sec (seconds) instead of Reps
+
+STRETCHES (bottom of form, per session):
+- Checkmarks for: 1. Quad, 2. Hamstring, 3. Glute, 4. Hip flexor, 5. Calf, 6. Chest, 7. Upper back
+- Only include stretches that have a visible checkmark for that date
+- If no stretches are checked for a date, return empty array []
+
+KINESIOLOGIST SIGNATURE: at the bottom of each date column, check if initials/signature present
+
+IMPORTANT READING NOTES:
+- The form may be rotated 90 degrees — read in landscape orientation
+- Each DATE is a separate session object in the output
+- Exercises with no data for a date still appear but with empty sets: []
+- Use the full exercise name as printed on the form for exercise_name
 
 """
     for i, ex in enumerate(examples, 1):
         prompt += f"\nExample {i}:\n{ex['image_description']}\nCorrect extraction:\n{json.dumps(ex['expected_json'], indent=2)}\n"
-    prompt += "\n\nNow extract from this new form. Return only checked stretches.\n"
+    prompt += "\nNow extract from this new form image. Return JSON matching the schema exactly.\n"
     if force_json_instruction:
         prompt += _JSON_SUFFIX
     return prompt
 
 
 def build_reconciliation_prompt(cardio_data, strength_data, *, force_json_instruction=False):
-    prompt = f"""You are reconciling data from two pages of the same fitness form.
+    prompt = f"""You are reconciling data from two pages of the same fitness form (one cardio, one strength).
 
-Cardio page data: {json.dumps(cardio_data, indent=2)}
-Strength page data: {json.dumps(strength_data, indent=2)}
+Cardio page extracted data: {json.dumps(cardio_data, indent=2)}
+Strength page extracted data: {json.dumps(strength_data, indent=2)}
 
-Check CCCARE IDs:
-- Cardio: {cardio_data.get('cccare_id')}
-- Strength: {strength_data.get('cccare_id')}
+CCCARE IDs found:
+- Cardio page: {cardio_data.get('cccare_id')}
+- Strength page: {strength_data.get('cccare_id')}
 
-If IDs differ, examine both images and choose the correct one based on handwriting clarity.
+RULES:
+1. If one page has a CCCARE ID and the other is null/blank, use the non-null ID
+2. If both have IDs but they differ, examine both images and pick the clearer one
+3. If both are null, set cccare_id to null and confidence to "low"
+4. Set id_mismatch to true only if both pages had non-null IDs that differ
 
-Return merged JSON with these fields:
-- cccare_id: the single correct ID
-- id_mismatch: true/false
+Return merged JSON with:
+- cccare_id: the single correct ID (or null if neither page had one)
+- id_mismatch: boolean
 - confidence: "high", "medium", or "low"
-- cardio_data: the full cardio extraction
-- strength_data: the full strength extraction
-- notes: any reconciliation notes (or null)
+- cardio_data: the full cardio extraction as-is
+- strength_data: the full strength extraction as-is
+- notes: any reconciliation notes (e.g. "Cardio ID was blank, used strength ID") or null
 """
     if force_json_instruction:
         prompt += _JSON_SUFFIX
