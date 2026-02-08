@@ -77,8 +77,8 @@ success_display_seconds = 10     # DONE → READY
 # ===========================================================================
 
 [opencv_thresholds]
-blur_threshold = 90             # Laplacian variance minimum
-contrast_threshold = 20         # Grayscale std dev minimum
+blur_threshold = 60             # Laplacian variance minimum
+contrast_threshold = 10         # Grayscale std dev minimum
 glare_threshold = 0.05          # Max fraction of blown-out pixels
 mean_intensity_min = 50         # Minimum brightness
 

@@ -1,0 +1,408 @@
+{
+  "cccare_id": "03-51.CHO",
+  "id_mismatch": false,
+  "confidence": "high",
+  "cardio_data": {
+    "page_type": "cardio",
+    "cccare_id": "03-51.CHO",
+    "target_hr": null,
+    "target_rpe": "11-13",
+    "sessions": [
+      {
+        "date": "Mar 12",
+        "activity": "ROW",
+        "time_minutes": 7,
+        "work_rate": null,
+        "heart_rate_range": "92 - 103",
+        "rpe": 15,
+        "comments": "Med. Intensity",
+        "watch": "02",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "MAR 14",
+        "activity": "TM",
+        "time_minutes": 13,
+        "work_rate": "2.7 @ 3%",
+        "heart_rate_range": "85-100",
+        "rpe": 10,
+        "comments": "Low Intensity",
+        "watch": "03",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "MAR 15",
+        "activity": "UB",
+        "time_minutes": 10,
+        "work_rate": null,
+        "heart_rate_range": "88 to 110",
+        "rpe": 12,
+        "comments": "Feeling good",
+        "watch": "03",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "MAR 17",
+        "activity": "RB",
+        "time_minutes": 12,
+        "work_rate": "3.0 @ 2%",
+        "heart_rate_range": "90-105",
+        "rpe": 11,
+        "comments": null,
+        "watch": "02",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "MAR 18",
+        "activity": "NS",
+        "time_minutes": 15,
+        "work_rate": null,
+        "heart_rate_range": "85-100",
+        "rpe": 10,
+        "comments": null,
+        "watch": "03",
+        "kinesiologist_signed": true
+      }
+    ]
+  },
+  "strength_data": {
+    "page_type": "strength",
+    "cccare_id": "03-51.CHO",
+    "year": 2026,
+    "sessions": [
+      {
+        "date": "Mar 12",
+        "exercises": [
+          {
+            "exercise_name": "Thoracic rotation (standing against wall)",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Dynamic hip mobility lateral lunge",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Squats (grip feet, spread floor)",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 7
+              }
+            ]
+          },
+          {
+            "exercise_name": "Chest press on bench",
+            "sets": [
+              {
+                "reps": 10,
+                "weight": 10
+              }
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
+            "sets": [
+              {
+                "reps": 25,
+                "weight": 5
+              }
+            ]
+          },
+          {
+            "exercise_name": "Vertical traction machine (seat #__)",
+            "sets": [
+              {
+                "reps": 10,
+                "weight": 15
+              }
+            ]
+          },
+          {
+            "exercise_name": "Airplane exercise",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          }
+        ],
+        "stretches_completed": true,
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Mar 14",
+        "exercises": [
+          {
+            "exercise_name": "Thoracic rotation (standing against wall)",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Dynamic hip mobility lateral lunge",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Squats (grip feet, spread floor)",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 10
+              }
+            ]
+          },
+          {
+            "exercise_name": "Chest press on bench",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 10
+              }
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 5
+              }
+            ]
+          }
+        ],
+        "stretches_completed": true,
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Mar 15",
+        "exercises": [
+          {
+            "exercise_name": "Thoracic rotation (standing against wall)",
+            "sets": [
+              {
+                "reps": 14,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Dynamic hip mobility lateral lunge",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Squats (grip feet, spread floor)",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 12
+              }
+            ]
+          },
+          {
+            "exercise_name": "Chest press on bench",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 10
+              }
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 7
+              }
+            ]
+          },
+          {
+            "exercise_name": "Vertical traction machine (seat #__)",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 20
+              }
+            ]
+          },
+          {
+            "exercise_name": "Airplane exercise",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 0
+              }
+            ]
+          }
+        ],
+        "stretches_completed": true,
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Mar 17",
+        "exercises": [
+          {
+            "exercise_name": "Thoracic rotation (standing against wall)",
+            "sets": [
+              {
+                "reps": 13,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Dynamic hip mobility lateral lunge",
+            "sets": [
+              {
+                "reps": 13,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
+            "sets": [
+              {
+                "reps": 13,
+                "weight": 10
+              }
+            ]
+          },
+          {
+            "exercise_name": "Vertical traction machine (seat #__)",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 12
+              }
+            ]
+          },
+          {
+            "exercise_name": "Airplane exercise",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
+            "sets": [
+              {
+                "reps": 13,
+                "weight": 0
+              }
+            ]
+          }
+        ],
+        "stretches_completed": true,
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Mar 18",
+        "exercises": [
+          {
+            "exercise_name": "Thoracic rotation (standing against wall)",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Dynamic hip mobility lateral lunge",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 0
+              }
+            ]
+          },
+          {
+            "exercise_name": "Squats (grip feet, spread floor)",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 15
+              }
+            ]
+          },
+          {
+            "exercise_name": "Chest press on bench",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 20
+              }
+            ]
+          },
+          {
+            "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
+            "sets": [
+              {
+                "reps": 15,
+                "weight": 20
+              }
+            ]
+          },
+          {
+            "exercise_name": "Vertical traction machine (seat #__)",
+            "sets": [
+              {
+                "reps": 12,
+                "weight": 15
+              }
+            ]
+          },
+          {
+            "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
+            "sets": [
+              {
+                "reps": 14,
+                "weight": 0
+              }
+            ]
+          }
+        ],
+        "stretches_completed": true,
+        "kinesiologist_signed": true
+      }
+    ]
+  },
+  "notes": null
+}

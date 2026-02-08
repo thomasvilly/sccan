@@ -2,11 +2,14 @@ import cv2
 
 # Use DirectShow (Windows backend)
 cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
-
 # 1. FORCE 1080p (This is CRITICAL for wide angle)
 # If this fails, the camera defaults to 640x480 which = ZOOMED IN CROP
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+
+cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25) # Manual Mode key
+
+cap.set(cv2.CAP_PROP_EXPOSURE, -5)
 
 # 2. RESET ZOOM (Force it to 100/Minimum)
 # On Windows/Logitech, 100 is usually "1x" (No Zoom)
