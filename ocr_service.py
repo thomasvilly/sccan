@@ -1,6 +1,7 @@
 """
 ocr_service.py — Single-Call Vision LLM extraction.
 Sends BOTH images in one request to reduce latency and cost.
+Few-Shot Examples now use (2 Images -> 1 JSON) structure.
 """
 
 import asyncio
@@ -19,24 +20,19 @@ load_dotenv()
 #  1. CONFIGURATION
 # ===========================================================================
 
-# Define your examples here. 
-# We use single-page examples to teach the model what each page LOOKS like.
+# CORRECTED STRUCTURE:
+# Each example consists of TWO images and ONE combined ground-truth JSON.
 FEW_SHOT_EXAMPLES = [
     {
-        "type": "cardio",
-        "image_path": "ex3_2.jpg", 
-        "json_path": "third_example.json"
-    },
-    {
-        "type": "strength",
-        "image_path": "ex3_1.jpg",
-        "json_path": "third_example.json"
+        "image_paths": ["examples/ex3_1.jpg", "examples/ex3_2.jpg"], 
+        "json_path": "examples/third_example.json"
     }
+    # You can add more pairs here if you have them
 ]
 
 SYSTEM_PROMPT = """You are an expert OCR engine for fitness forms.
 You will receive TWO images of a fitness log. 
-1. Identify each page (Cardio vs Strength).
+1. Identify which page is CARDIO and which is STRENGTH.
 2. Extract data from BOTH pages.
 3. Merge them into a single JSON response.
 
@@ -72,13 +68,13 @@ def encode_image_base64(image_path):
 
 def load_json_content(json_path):
     if not os.path.exists(json_path):
+        logging.warning(f"JSON not found: {json_path}")
         return {}
     with open(json_path, "r") as f:
         return json.load(f)
 
 def clean_and_parse_json(response_text):
     text = response_text.strip()
-    # Strip markdown if present
     if text.startswith("```"):
         text = text.split("\n", 1)[-1]
         text = text.rsplit("\n", 1)[0]
@@ -87,58 +83,61 @@ def clean_and_parse_json(response_text):
     return json.loads(text.strip())
 
 # ===========================================================================
-#  3. PROMPT BUILDER (Multi-Image)
+#  3. PROMPT BUILDER (Multi-Image Few-Shot)
 # ===========================================================================
 
-def build_single_call_messages(img1_b64, img2_b64):
+def build_single_call_messages(target_img1_b64, target_img2_b64):
     """
-    Constructs the prompt:
+    Constructs the prompt history:
     System: Rules
-    User: [Example 1 Image]
+    User: [Example 1 Img A] [Example 1 Img B] "Extract these"
     Assistant: [Example 1 JSON]
-    ...
-    User: [Target Image 1] [Target Image 2] "Process these together"
+    User: [Target Img A] [Target Img B] "Extract these"
     """
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT}
     ]
 
-    # 1. Add Single-Page Examples (To teach the model the schema)
+    # 1. Add Full 2-Page Examples
     for ex in FEW_SHOT_EXAMPLES:
-        b64 = encode_image_base64(ex["image_path"])
+        # Load images
+        imgs_b64 = []
+        for path in ex["image_paths"]:
+            b64 = encode_image_base64(path)
+            if b64:
+                imgs_b64.append(b64)
+        
         json_data = load_json_content(ex["json_path"])
         
-        if b64 and json_data:
-            messages.append({
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": f"Example of a {ex['type']} page:"},
-                    {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{b64}"}}
-                ]
-            })
-            messages.append({
-                "role": "assistant",
-                "content": json.dumps(json_data, indent=2)
-            })
+        # Only add if we have at least one image and the JSON
+        if imgs_b64 and json_data:
+            user_content = [{"type": "text", "text": "Here is an example set of forms:"}]
+            for b64 in imgs_b64:
+                user_content.append({
+                    "type": "image_url", 
+                    "image_url": {"url": f"data:image/jpeg;base64,{b64}"}
+                })
+            
+            messages.append({"role": "user", "content": user_content})
+            messages.append({"role": "assistant", "content": json.dumps(json_data, indent=2)})
 
-    # 2. Add BOTH Target Images in one message
+    # 2. Add the Target Images
     messages.append({
         "role": "user",
         "content": [
-            {"type": "text", "text": "Here are two pages from the same log. Identify, extract, and reconcile them into one JSON."},
-            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img1_b64}"}},
-            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img2_b64}"}}
+            {"type": "text", "text": "Here are two new pages. Identify, extract, and reconcile them into one JSON."},
+            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{target_img1_b64}"}},
+            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{target_img2_b64}"}}
         ]
     })
     
     return messages
 
 def convert_openai_to_ollama(messages):
-    """Converts OpenAI format to Ollama format (images as bytes list)."""
+    """Converts OpenAI format to Ollama format."""
     ollama_messages = []
     for msg in messages:
         new_msg = {"role": msg["role"], "content": ""}
-        
         if isinstance(msg["content"], list):
             text_parts = []
             images = []
@@ -154,7 +153,6 @@ def convert_openai_to_ollama(messages):
                 new_msg["images"] = images
         else:
             new_msg["content"] = msg["content"]
-            
         ollama_messages.append(new_msg)
     return ollama_messages
 
@@ -171,7 +169,7 @@ async def run_openrouter(config, messages):
     }
     
     payload = {
-        "model": config["models"]["cardio_extraction_model"], # Use the best model
+        "model": config["models"]["cardio_extraction_model"],
         "messages": messages,
         "response_format": {"type": "json_object"},
     }
@@ -181,7 +179,7 @@ async def run_openrouter(config, messages):
             f"{config['api']['openrouter_base_url']}/chat/completions",
             json=payload,
             headers=headers,
-            timeout=60, # Longer timeout for double image processing
+            timeout=60,
         )
     
     if response.status_code != 200:
@@ -194,14 +192,13 @@ def run_ollama(config, messages):
     import ollama
     client = ollama.Client(host=config["ollama"].get("host"))
     
-    # Convert format
     ollama_msgs = convert_openai_to_ollama(messages)
     
     response = client.chat(
         model=config["ollama"]["extraction_model"],
         messages=ollama_msgs,
         format="json",
-        options={"num_ctx": 8192} # Crucial: Increase context for 2 images
+        options={"num_ctx": 16384} # High context for multi-image history
     )
     return clean_and_parse_json(response["message"]["content"])
 
@@ -210,18 +207,18 @@ def run_ollama(config, messages):
 # ===========================================================================
 
 async def process_form_single_pass(path1, path2, config):
-    logging.info(f"Processing {path1} and {path2} in SINGLE PASS...")
+    logging.info(f"Processing {path1} and {path2}...")
     
-    # 1. Prepare Images
     img1 = encode_image_base64(path1)
     img2 = encode_image_base64(path2)
     
-    # 2. Build ONE Prompt with BOTH images
+    if not img1 or not img2:
+        logging.error("Failed to load target images.")
+        return {"error": "image_load_failed"}
+
     messages = build_single_call_messages(img1, img2)
     
-    # 3. Send to backend
     if config["ocr"]["backend"] == "ollama":
-        # Run sync ollama in executor
         loop = asyncio.get_event_loop()
         result = await loop.run_in_executor(None, run_ollama, config, messages)
     else:
@@ -244,6 +241,6 @@ if __name__ == "__main__":
     
     print(json.dumps(res, indent=2))
     
-    # Save debug output
+    # Save output
     with open("results/latest_result.json", "w") as f:
         json.dump(res, f, indent=2)
