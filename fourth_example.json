@@ -96,7 +96,7 @@
             "sets": [
               {
                 "reps": 15,
-                "weight": 7
+                "weight": 8
               }
             ]
           },
@@ -113,7 +113,7 @@
             "exercise_name": "Bent knee hip raise - heels on step (____ risers) or heels on glute bench",
             "sets": [
               {
-                "reps": 25,
+                "reps": 15,
                 "weight": 5
               }
             ]
@@ -132,7 +132,7 @@
             "sets": [
               {
                 "reps": 15,
-                "weight": 0
+                "weight": 15
               }
             ]
           },
@@ -254,7 +254,7 @@
             "sets": [
               {
                 "reps": 15,
-                "weight": 20
+                "weight": 10
               }
             ]
           },
@@ -262,13 +262,22 @@
             "exercise_name": "Airplane exercise",
             "sets": [
               {
-                "reps": 15,
+                "reps": 20,
+                "weight": 15
+              }
+            ]
+          },
+          {
+            "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
+            "sets": [
+              {
+                "reps": 13,
                 "weight": 0
               }
             ]
           }
         ],
-        "stretches_completed": true,
+        "stretches_completed": false,
         "kinesiologist_signed": true
       },
       {
@@ -315,7 +324,7 @@
             "sets": [
               {
                 "reps": 12,
-                "weight": 0
+                "weight": 30
               }
             ]
           },
@@ -323,7 +332,7 @@
             "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
             "sets": [
               {
-                "reps": 13,
+                "reps": 14,
                 "weight": 0
               }
             ]
@@ -367,7 +376,7 @@
             "sets": [
               {
                 "reps": 15,
-                "weight": 20
+                "weight": 10
               }
             ]
           },
@@ -376,7 +385,7 @@
             "sets": [
               {
                 "reps": 15,
-                "weight": 20
+                "weight": 10
               }
             ]
           },
@@ -386,15 +395,6 @@
               {
                 "reps": 12,
                 "weight": 15
-              }
-            ]
-          },
-          {
-            "exercise_name": "Front bridge with forearms on wedge (#__) - progress to floor",
-            "sets": [
-              {
-                "reps": 14,
-                "weight": 0
               }
             ]
           }
