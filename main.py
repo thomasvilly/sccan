@@ -474,17 +474,27 @@ def handle_capture(best_frame, config, is_second_page=False):
 
 
 def process_frame_ready(frame, config):
-    # NEW: If the thing in the camera is the exact same thing we just finished, IGNORE IT.
+    # 1. Check if ANY form is currently visible
+    is_form = form_detected(frame, config)
+
+    if not is_form:
+        # CRITICAL FIX: If no form is seen (empty desk), the user has removed the document.
+        # We clear the "lock" so the system is ready for the next paper.
+        st.session_state.consecutive_detections = 0
+        st.session_state.last_finished_scan = None 
+        return
+
+    # 2. If a form IS visible, check if it's the exact same one we just finished scanning
     if st.session_state.last_finished_scan:
         if is_duplicate_image(st.session_state.last_finished_scan, frame, threshold=15):
-            return # Ignore this frame, stay in READY
+            # It looks exactly like the document we just finished. 
+            # Ignore it so we don't instantly re-scan the same paper.
+            return 
 
-    if form_detected(frame, config):
-        st.session_state.consecutive_detections += 1
-        if st.session_state.consecutive_detections >= config["state_transitions"]["form_detection_frames"]:
-            transition_to(PROCESSING)
-    else:
-        st.session_state.consecutive_detections = 0
+    # 3. It's a form, and it's either NEW or the desk was cleared previously.
+    st.session_state.consecutive_detections += 1
+    if st.session_state.consecutive_detections >= config["state_transitions"]["form_detection_frames"]:
+        transition_to(PROCESSING)
 
 
 def process_frame_processing(frame_full, frame, config):
@@ -565,7 +575,7 @@ def process_frame_done(config):
 
     if time.time() - st.session_state.done_start_time >= config["timeouts"]["success_display_seconds"]:
         cleanup_old_orphans(config)
-        time.sleep(1)
+        time.sleep(0.5)
         transition_to(READY)
 
 

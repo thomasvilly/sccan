@@ -70,7 +70,7 @@ issue_retry_frames = 5          # ISSUES → PROCESSING
 [timeouts]
 issue_timeout_seconds = 3.0     # PROCESSING → ISSUES
 orphan_timeout_seconds = 120    # AWAITING → save orphan
-success_display_seconds = 10     # DONE → READY
+success_display_seconds = 3     # DONE → READY
 
 # ===========================================================================
 #  OPENCV THRESHOLDS
