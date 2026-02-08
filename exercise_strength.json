@@ -1,0 +1,128 @@
+{
+  "strength_data": {
+    "cccare_id": "11-59.VEL",
+    "year": 2026,
+    "sessions": [
+      {
+        "date": "Jan 5",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 12, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 12, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 7",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 12, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 14, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 12",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 14, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": [],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 14",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 15, "weight": 0 }, { "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 19",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 21",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 8, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 26",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 8, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 28",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 0, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 15 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": [],
+        "kinesiologist_signed": true     
+      }
+    ]
+  }
+}

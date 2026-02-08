@@ -1,0 +1,100 @@
+{
+  "cccare_id": "11-59.VEL",
+  "confidence": "high",
+  "notes": "Cardio form ID was blank; inferred from Strength form. Signatures verified present for all dates on both forms.",
+  "cardio_data": {
+    "cccare_id": null,
+    "target_hr": null,
+    "target_rpe": "11-13",
+    "sessions": [
+      {
+        "date": "Jan 5",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "4.0 - 1%",
+        "heart_rate_range": "87-105",
+        "rpe": 13,
+        "comments": null,
+        "watch": "01",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 7",
+        "activity": "TM",
+        "time_minutes": 25,
+        "work_rate": "4.0 - 1%",
+        "heart_rate_range": "87-105",
+        "rpe": 13,
+        "comments": null,
+        "watch": "03",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 12",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "5.0",
+        "heart_rate_range": "88-110",
+        "rpe": 14,
+        "comments": null,
+        "watch": "01",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 14",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "5.0",
+        "heart_rate_range": "89-111",
+        "rpe": 14,
+        "comments": null,
+        "watch": "19",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 19",
+        "activity": "NS",
+        "time_minutes": 18,
+        "work_rate": "4 @ 50",
+        "heart_rate_range": "90-112",
+        "rpe": 16,
+        "comments": "Tried hard, waited to do 20",
+        "watch": "12",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 21",
+        "activity": "NS",
+        "time_minutes": 19,
+        "work_rate": "4 @ 50",
+        "heart_rate_range": "89-111",
+        "rpe": 16,
+        "comments": "Too hard",
+        "watch": "14",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 26",
+        "activity": "UB",
+        "time_minutes": 40,
+        "work_rate": "3 @ 75",
+        "heart_rate_range": "85-100",
+        "rpe": 12,
+        "comments": null,
+        "watch": "5",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 28",
+        "activity": "UB",
+        "time_minutes": 40,
+        "work_rate": "3 @ 80",
+        "heart_rate_range": "85-102",
+        "rpe": 12,
+        "comments": null,
+        "watch": "6",
+        "kinesiologist_signed": true
+      }
+    ]
+  }
+}
