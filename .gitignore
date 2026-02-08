@@ -2,3 +2,4 @@
 kiosk.log
 *.jpg
 *.pyc
+.env

@@ -8,7 +8,7 @@
 [ocr]
 # "openrouter" = Cloud API (GPT-4o, Claude, Gemini via OpenRouter)
 # "ollama"     = Local CPU inference (Qwen2.5VL, Llama 3.2 Vision, Moondream)
-backend = "ollama"
+backend = "openrouter"
 
 # ===========================================================================
 #  OLLAMA (Local CPU inference)

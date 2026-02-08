@@ -414,9 +414,7 @@ def handle_capture(best_frame, config, is_second_page=False):
         if is_duplicate_image(first.filepath, filepath, threshold=5):
             logging.warning("Duplicate detected: You haven't flipped the page yet.")
             
-            # --- CRITICAL FIX: RESET THE COUNTER ---
-            # This stops the "22/1" bug. We force the app to start counting from 0 again.
-            st.session_state["good_frames"] = 0
+            st.session_state.consecutive_good = 0
             
             # Delete the useless duplicate file
             try:
@@ -614,7 +612,18 @@ def run_kiosk():
         status_placeholder = st.empty()
         debug_placeholder = st.empty()
     
-    cap = cv2.VideoCapture(config["camera"]["camera_index"])
+    cap = cv2.VideoCapture(config["camera"]["camera_index"], cv2.CAP_DSHOW)
+    
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+
+    cap.set(cv2.CAP_PROP_AUTOFOCUS, 0) 
+    cap.set(cv2.CAP_PROP_FOCUS, 10) 
+
+    cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25) # Manual Mode key
+
+    cap.set(cv2.CAP_PROP_EXPOSURE, -6)
+    cap.set(cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 5000)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, config["camera"]["capture_width"])
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, config["camera"]["capture_height"])
 
