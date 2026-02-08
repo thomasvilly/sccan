@@ -43,13 +43,9 @@ app_title = "Fitness Form Kiosk"
 
 [models]
 # OpenRouter model strings — swap these to test different providers
-cardio_extraction_model = "qwen/qwen3-vl-32b-instruct"
-strength_extraction_model = "qwen/qwen3-vl-32b-instruct"
-reconciliation_model = "qwen/qwen3-vl-32b-instruct"
-
-# Alternatives:
-# "anthropic/claude-3.5-sonnet"
-# "google/gemini-2.0-flash-001"
+cardio_extraction_model = "google/gemini-3-pro-preview"
+strength_extraction_model = "google/gemini-3-pro-preview"
+reconciliation_model = "google/gemini-3-pro-preview"
 
 # ===========================================================================
 #  CAMERA

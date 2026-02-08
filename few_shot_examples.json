@@ -15,7 +15,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {
@@ -30,7 +30,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {
@@ -60,7 +60,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {
@@ -75,7 +75,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {
@@ -90,7 +90,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {
@@ -105,7 +105,7 @@
           { "exercise_name": "Airplane exercise", "sets": [] },
           { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
         ],
-        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "stretches_completed": true,
         "kinesiologist_signed": true     
       },
       {

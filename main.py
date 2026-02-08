@@ -108,14 +108,12 @@ def form_detected(frame, config):
     blurred = cv2.GaussianBlur(gray, (k, k), 0)
     edges = cv2.Canny(blurred, fd["canny_low"], fd["canny_high"])
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    print(f"Contours found: {len(contours)}")
     
     frame_area = frame.shape[0] * frame.shape[1]
 
     for contour in sorted(contours, key=cv2.contourArea, reverse=True)[:5]:
         perimeter = cv2.arcLength(contour, True)
         approx = cv2.approxPolyDP(contour, fd["contour_approx_epsilon"] * perimeter, True)
-        print(f"  Contour: points={len(approx)} area_ratio={cv2.contourArea(approx)/frame_area:.3f}") 
 
         if 4 <= len(approx) <= 8:
             area = cv2.contourArea(approx)
@@ -127,7 +125,6 @@ def form_detected(frame, config):
                 if min(w, h) == 0:
                     continue
                 aspect = max(w, h) / min(w, h)
-                print(f"  QUAD: area_ratio={area_ratio:.3f} aspect={aspect:.2f}")
                 if fd["aspect_ratio_min"] <= aspect <= fd["aspect_ratio_max"]:
                     logging.debug(f"Form detected: area_ratio={area_ratio:.3f} aspect={aspect:.2f}")
                     return True
@@ -367,7 +364,7 @@ def init_session_state():
 def transition_to(new_state, **kwargs):
     old = st.session_state.state
     st.session_state.state = new_state
-    logging.info(f"State: {old} → {new_state} {kwargs if kwargs else ''}")
+    logging.info(f"State: {old} -> {new_state} {kwargs if kwargs else ''}")
 
     if new_state == READY:
         st.session_state.consecutive_detections = 0

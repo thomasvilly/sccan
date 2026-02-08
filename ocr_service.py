@@ -187,6 +187,20 @@ def parse_json_response(text):
     logging.debug(f"Parsing JSON response ({len(cleaned)} chars)")
     return json.loads(cleaned)
 
+def clean_and_parse_json(response_text):
+    """
+    Strips Markdown code blocks (```json ... ```) from LLM responses 
+    before parsing.
+    """
+    # Remove the specific 'json' language tag if present
+    if "```json" in response_text:
+        response_text = response_text.replace("```json", "")
+    
+    # Remove any remaining backticks
+    if "```" in response_text:
+        response_text = response_text.replace("```", "")
+        
+    return json.loads(response_text.strip())
 
 # ===========================================================================
 #  BACKEND: OPENROUTER (Cloud API)
@@ -241,7 +255,8 @@ async def _openrouter_extract_page(client, image_b64, prompt, page_label, model,
     logging.info(f"[openrouter] {page_label} done in {elapsed:.2f}s")
     logging.debug(f"[openrouter] Raw response ({page_label}): {result}")
 
-    return json.loads(result["choices"][0]["message"]["content"])
+    content = result["choices"][0]["message"]["content"]
+    return clean_and_parse_json(content)
 
 
 async def _openrouter_reconcile(page1_data, page2_data, page1_b64, page2_b64, config):
@@ -278,8 +293,8 @@ async def _openrouter_reconcile(page1_data, page2_data, page1_b64, page2_b64, co
 
     elapsed = time.time() - t0
     logging.info(f"[openrouter] Reconciliation done in {elapsed:.2f}s")
-    return json.loads(result["choices"][0]["message"]["content"])
-
+    content = result["choices"][0]["message"]["content"]
+    return clean_and_parse_json(content)
 
 async def openrouter_pipeline(page1_path, page2_path, config, examples):
     """Full OCR pipeline using OpenRouter. Same prompt for both images."""
