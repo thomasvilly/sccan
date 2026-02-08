@@ -108,14 +108,16 @@ def form_detected(frame, config):
     blurred = cv2.GaussianBlur(gray, (k, k), 0)
     edges = cv2.Canny(blurred, fd["canny_low"], fd["canny_high"])
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
+    print(f"Contours found: {len(contours)}")
+    
     frame_area = frame.shape[0] * frame.shape[1]
 
     for contour in sorted(contours, key=cv2.contourArea, reverse=True)[:5]:
         perimeter = cv2.arcLength(contour, True)
         approx = cv2.approxPolyDP(contour, fd["contour_approx_epsilon"] * perimeter, True)
+        print(f"  Contour: points={len(approx)} area_ratio={cv2.contourArea(approx)/frame_area:.3f}") 
 
-        if len(approx) == 4:
+        if 4 <= len(approx) <= 8:
             area = cv2.contourArea(approx)
             area_ratio = area / frame_area
 
@@ -125,6 +127,7 @@ def form_detected(frame, config):
                 if min(w, h) == 0:
                     continue
                 aspect = max(w, h) / min(w, h)
+                print(f"  QUAD: area_ratio={area_ratio:.3f} aspect={aspect:.2f}")
                 if fd["aspect_ratio_min"] <= aspect <= fd["aspect_ratio_max"]:
                     logging.debug(f"Form detected: area_ratio={area_ratio:.3f} aspect={aspect:.2f}")
                     return True
@@ -354,6 +357,7 @@ def init_session_state():
         "ocr_task_launched": False,
         "last_result": None,
         "camera_opened": False,
+        "awaiting_form_gone": False,
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -380,6 +384,7 @@ def transition_to(new_state, **kwargs):
     elif new_state == AWAITING_SECOND_PAGE:
         st.session_state.awaiting_start_time = time.time()
         st.session_state.awaiting_consecutive_detections = 0
+        st.session_state.awaiting_form_gone = False
     elif new_state == DONE:
         st.session_state.done_start_time = time.time()
         st.session_state.ocr_task_launched = False
@@ -508,13 +513,22 @@ def process_frame_awaiting(frame, config):
         transition_to(READY)
         return
 
-    if form_detected(frame, config):
+    detected = form_detected(frame, config)
+
+    # Phase 1: Wait for the form to DISAPPEAR (person lifts it to flip)
+    if not st.session_state.awaiting_form_gone:
+        if not detected:
+            st.session_state.awaiting_form_gone = True
+            logging.info("Form removed from tray — ready for second page")
+        return  # Don't look for new form until old one is gone
+
+    # Phase 2: Form was gone, now look for it to reappear
+    if detected:
         st.session_state.awaiting_consecutive_detections += 1
         if st.session_state.awaiting_consecutive_detections >= config["state_transitions"]["form_detection_frames"]:
             transition_to(PROCESSING)
     else:
         st.session_state.awaiting_consecutive_detections = 0
-
 
 def process_frame_done(config):
     if not st.session_state.ocr_task_launched and st.session_state.last_result:
