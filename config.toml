@@ -43,9 +43,9 @@ app_title = "Fitness Form Kiosk"
 
 [models]
 # OpenRouter model strings — swap these to test different providers
-cardio_extraction_model = "openai/gpt-4o"
-strength_extraction_model = "openai/gpt-4o"
-reconciliation_model = "openai/gpt-4o"
+cardio_extraction_model = "qwen/qwen3-vl-32b-instruct"
+strength_extraction_model = "qwen/qwen3-vl-32b-instruct"
+reconciliation_model = "qwen/qwen3-vl-32b-instruct"
 
 # Alternatives:
 # "anthropic/claude-3.5-sonnet"

@@ -1,165 +1,226 @@
 {
-  "cardio_examples": [
-    {
-      "image_description": "Landscape cardio recording log, rotated 90 degrees. CCCARE ID field is blank. Target RPE: 11-13. Year: 2026. 8 sessions from Jan 5 to Jan 28. Activities include TM (treadmill), NS (NuStep), and UB (upright bike). Work rates vary by equipment type. All rows have kinesiologist signatures.",
-      "expected_json": {
-        "cccare_id": null,
-        "target_hr": null,
-        "target_rpe": "11-13",
-        "equipment_settings": {
-          "nustep_arms": null,
-          "nustep_seat": null,
-          "leg_stab": null,
-          "recumbent_bike_seat": null,
-          "upright_bike_seat": null
-        },
-        "sessions": [
-          {
-            "date": "Jan 5",
-            "activity": "TM",
-            "time_minutes": 30,
-            "work_rate": "4.0 - 1%",
-            "heart_rate_range": "87-105",
-            "rpe": 13,
-            "comments": null,
-            "watch": "01",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 7",
-            "activity": "TM",
-            "time_minutes": 25,
-            "work_rate": "4.0 - 1%",
-            "heart_rate_range": "87-105",
-            "rpe": 13,
-            "comments": null,
-            "watch": "03",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 12",
-            "activity": "TM",
-            "time_minutes": 30,
-            "work_rate": "5.0",
-            "heart_rate_range": "88-110",
-            "rpe": 14,
-            "comments": null,
-            "watch": "01",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 14",
-            "activity": "TM",
-            "time_minutes": 30,
-            "work_rate": "5.0",
-            "heart_rate_range": "89-111",
-            "rpe": 14,
-            "comments": null,
-            "watch": "19",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 19",
-            "activity": "NS",
-            "time_minutes": 18,
-            "work_rate": "4 @ 50",
-            "heart_rate_range": "90-112",
-            "rpe": 16,
-            "comments": "Tried hard, waited to do 20",
-            "watch": "12",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 21",
-            "activity": "NS",
-            "time_minutes": 19,
-            "work_rate": "4 @ 50",
-            "heart_rate_range": "89-111",
-            "rpe": 16,
-            "comments": "Too hard",
-            "watch": "14",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 26",
-            "activity": "UB",
-            "time_minutes": 40,
-            "work_rate": "3 @ 75",
-            "heart_rate_range": "85-100",
-            "rpe": 12,
-            "comments": null,
-            "watch": "5",
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 28",
-            "activity": "UB",
-            "time_minutes": 40,
-            "work_rate": "3 @ 80",
-            "heart_rate_range": "85-102",
-            "rpe": 12,
-            "comments": null,
-            "watch": "6",
-            "kinesiologist_signed": true
-          }
-        ]
+  "strength_data": {
+    "cccare_id": "11-59.VEL",
+    "year": 2026,
+    "sessions": [
+      {
+        "date": "Jan 5",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 12, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 12, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 7",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 12, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 14, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 12",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 14, "weight": 0 }, { "reps": 14, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": [],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 14",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 15, "weight": 0 }, { "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 19",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 10, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 21",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 8, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 26",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 8, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 10 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 20 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
+        "kinesiologist_signed": true     
+      },
+      {
+        "date": "Jan 28",
+        "exercises": [
+          { "exercise_name": "Thoracic rotation (standing against wall)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{ "reps": 0, "weight": 0 }] },
+          { "exercise_name": "Squats (grip feet, spread floor)", "sets": [{ "reps": 15, "weight": 0 }] },
+          { "exercise_name": "Chest press on bench", "sets": [{ "reps": 10, "weight": 20 }, { "reps": 10, "weight": 15 }] },
+          { "exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{ "reps": 16, "weight": 0 }, { "reps": 16, "weight": 0 }] },
+          { "exercise_name": "Vertical traction machine (seat #___)", "sets": [{ "reps": 10, "weight": 5 }] },
+          { "exercise_name": "Airplane exercise", "sets": [] },
+          { "exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": [] }
+        ],
+        "stretches_completed": [],
+        "kinesiologist_signed": true     
       }
-    }
-  ],
-  "strength_examples": [
-    {
-      "image_description": "Landscape strength exercises form, rotated 90 degrees. CCCARE ID: 11-59.VEL. Year: 2026. 8 date columns from Jan 5 to Jan 28. Exercises include thoracic rotation, hip mobility, squats, chest press (2 sets), bent knee hip raise (2 sets), vertical traction, airplane, and front bridge. Stretches checkmarks vary by date. All dates have kinesiologist signatures.",
-      "expected_json": {
-        "cccare_id": "11-59.VEL",
-        "year": 2026,
-        "sessions": [
-          {
-            "date": "Jan 5",
-            "exercises": [
-              {"exercise_name": "Thoracic rotation (standing against wall)", "sets": [{"reps": 15, "weight": 0}]},
-              {"exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{"reps": 12, "weight": 0}]},
-              {"exercise_name": "Squats (grip feet, spread floor)", "sets": [{"reps": 15, "weight": 10}]},
-              {"exercise_name": "Chest press on bench", "sets": [{"reps": 10, "weight": 20}, {"reps": 10, "weight": 20}]},
-              {"exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{"reps": 12, "weight": 0}, {"reps": 14, "weight": 0}]},
-              {"exercise_name": "Vertical traction machine (seat #___)", "sets": [{"reps": 10, "weight": 5}]},
-              {"exercise_name": "Airplane exercise", "sets": []},
-              {"exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": []}
-            ],
-            "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 7",
-            "exercises": [
-              {"exercise_name": "Thoracic rotation (standing against wall)", "sets": [{"reps": 15, "weight": 0}]},
-              {"exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{"reps": 12, "weight": 0}]},
-              {"exercise_name": "Squats (grip feet, spread floor)", "sets": [{"reps": 15, "weight": 10}]},
-              {"exercise_name": "Chest press on bench", "sets": [{"reps": 10, "weight": 20}, {"reps": 10, "weight": 20}]},
-              {"exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{"reps": 14, "weight": 0}, {"reps": 14, "weight": 0}]},
-              {"exercise_name": "Vertical traction machine (seat #___)", "sets": [{"reps": 10, "weight": 5}]},
-              {"exercise_name": "Airplane exercise", "sets": []},
-              {"exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": []}
-            ],
-            "stretches_completed": ["Quad", "Hamstring", "Glute", "Hip flexor", "Calf", "Chest", "Upper back"],
-            "kinesiologist_signed": true
-          },
-          {
-            "date": "Jan 12",
-            "exercises": [
-              {"exercise_name": "Thoracic rotation (standing against wall)", "sets": [{"reps": 15, "weight": 0}]},
-              {"exercise_name": "Dynamic hip mobility lateral lunge", "sets": [{"reps": 10, "weight": 0}]},
-              {"exercise_name": "Squats (grip feet, spread floor)", "sets": [{"reps": 15, "weight": 10}]},
-              {"exercise_name": "Chest press on bench", "sets": [{"reps": 10, "weight": 20}, {"reps": 10, "weight": 20}]},
-              {"exercise_name": "Bent knee hip raise - heels on step (___ risers) or heels on glute bench", "sets": [{"reps": 14, "weight": 0}, {"reps": 14, "weight": 0}]},
-              {"exercise_name": "Vertical traction machine (seat #___)", "sets": [{"reps": 10, "weight": 5}]},
-              {"exercise_name": "Airplane exercise", "sets": []},
-              {"exercise_name": "Front bridge with forearms on wedge (#___) - progress to floor", "sets": []}
-            ],
-            "stretches_completed": [],
-            "kinesiologist_signed": true
-          }
-        ]
+    ]
+  },
+    "cccare_id": "11-59.VEL",
+    "confidence": "high",
+    "notes": "Cardio form ID was blank; inferred from Strength form. Signatures verified present for all dates on both forms.",
+  "cardio_data": {
+    "cccare_id": null,
+    "target_hr": null,
+    "target_rpe": "11-13",
+    "sessions": [
+      {
+        "date": "Jan 5",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "4.0 - 1%",
+        "heart_rate_range": "87-105",
+        "rpe": 13,
+        "comments": null,
+        "watch": "01",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 7",
+        "activity": "TM",
+        "time_minutes": 25,
+        "work_rate": "4.0 - 1%",
+        "heart_rate_range": "87-105",
+        "rpe": 13,
+        "comments": null,
+        "watch": "03",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 12",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "5.0",
+        "heart_rate_range": "88-110",
+        "rpe": 14,
+        "comments": null,
+        "watch": "01",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 14",
+        "activity": "TM",
+        "time_minutes": 30,
+        "work_rate": "5.0",
+        "heart_rate_range": "89-111",
+        "rpe": 14,
+        "comments": null,
+        "watch": "19",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 19",
+        "activity": "NS",
+        "time_minutes": 18,
+        "work_rate": "4 @ 50",
+        "heart_rate_range": "90-112",
+        "rpe": 16,
+        "comments": "Tried hard, waited to do 20",
+        "watch": "12",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 21",
+        "activity": "NS",
+        "time_minutes": 19,
+        "work_rate": "4 @ 50",
+        "heart_rate_range": "89-111",
+        "rpe": 16,
+        "comments": "Too hard",
+        "watch": "14",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 26",
+        "activity": "UB",
+        "time_minutes": 40,
+        "work_rate": "3 @ 75",
+        "heart_rate_range": "85-100",
+        "rpe": 12,
+        "comments": null,
+        "watch": "5",
+        "kinesiologist_signed": true
+      },
+      {
+        "date": "Jan 28",
+        "activity": "UB",
+        "time_minutes": 40,
+        "work_rate": "3 @ 80",
+        "heart_rate_range": "85-102",
+        "rpe": 12,
+        "comments": null,
+        "watch": "6",
+        "kinesiologist_signed": true
       }
-    }
-  ]
+    ]
+  }
 }
